@@ -1,0 +1,7 @@
+streamlit
+openai
+gspread
+pandas
+PyMuPDF
+python-dotenv
+Pillow
