@@ -116,7 +116,8 @@ def save_paper(paper):
     sheet_url = os.getenv("GOOGLE_SHEET_URL")
     if not sheet_url:
         raise ValueError(".env 파일에 GOOGLE_SHEET_URL이 없습니다.")
-    spreadsheet = gspread.service_account(filename="google_secret.json").open_by_url(sheet_url)
+    gcp_cred = dict(st.secrets["gcp_service_account"])
+    spreadsheet = gspread.service_account_from_dict(gcp_cred).open_by_url(sheet_url)
     records = paper.get("측정기록") or []
     if not records:
         raise ValueError(f"검사넘버 {paper.get('검사넘버')}: 측정기록이 비어 있습니다.")
